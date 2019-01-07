@@ -2,7 +2,7 @@
 
 Once you've  built Tic Tac Toe in JavaScript, using logic that you created yourself. Now is time to work with an external API.   
 
-Core Tasks
+Core Tasks  
 [x] Familiarise yourself with the concept of an external API  
 [x] Familiarise yourself with synchronicity/asynchronicity in JavaScript  
 [x] Familiarise yourself with Fetch https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API  
@@ -15,4 +15,4 @@ Core Tasks
 Stretch Goals  
 - Select a city from a list, and display the weather for it  
 - Have a user type in a city, and display the weather for it  
-- Make it looks pretty  
+- Make it look pretty  
