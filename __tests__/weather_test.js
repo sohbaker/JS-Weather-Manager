@@ -19,7 +19,7 @@ describe('Weather', () => {
 
   it('can access the API for the current weather in London', async () => {
     const londonWeather = await weather.currentWeatherInLondon();
-    expect(londonWeather).toEqual(7);
+    expect(londonWeather).toEqual(10.3);
   });
 
 });
