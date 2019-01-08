@@ -27,8 +27,7 @@ describe('Weather', () => {
     expect(london5DayWeather.cnt).toEqual(40);
   });
 
-  it('returns five dates as strings in an array', async () => {
-    expect(weather.getDates().length).toEqual(5);
+  it('adds a specific timestamp to each date for the next four days in a new array', async () => {
+    expect(weather.getDates().length).toEqual(16);
   });
-
 });
