@@ -1,6 +1,6 @@
-import { OneDayWeather } from './one_day_weather';
+import { Weather } from './weather';
 
-const weatherOne = new OneDayWeather();
+const weatherOne = new Weather();
 
 async function getWeatherOne() {
   const displayTemp = document.getElementById('one-day-weather');
