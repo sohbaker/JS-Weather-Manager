@@ -1,11 +1,11 @@
-import { Weather } from './weather';
+import { OneDayLondonWeather } from './one-day-weather';
 
-const weather = new Weather();
+const weatherOne = new OneDayLondonWeather();
 
-async function getWeather() {
-  const temp = document.getElementById('display-weather');
-  temp.innerHTML = await weather.currentWeatherInLondon() + '&deg;C';
+async function getWeatherOne() {
+  const temp = document.getElementById('display-one-day-weather');
+  temp.innerHTML = await weatherOne.weatherInLondonOneDay() + '&deg;C';
   return temp;
 };
 
-getWeather();
+getWeatherOne();
