@@ -50,7 +50,18 @@ export class Weather {
       dateStrings.push(dateToString.substring(1, 11))
     });
 
-    return dateStrings
-  }
+    const times = ['00:00:00', '06:00:00', '12:00:00', '18:00:00']
+    let dateAndTimeArray = []
+
+    dateStrings.forEach(function(date) {
+      if(date !== dateStrings[0]) {
+        times.forEach(function(time) {
+          let dateAndTime = date + " " + time
+          dateAndTimeArray.push(dateAndTime)
+        })
+      }
+    });
+    return dateAndTimeArray;
+  };
 
 };
