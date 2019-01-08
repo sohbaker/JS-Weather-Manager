@@ -1,5 +1,5 @@
 # JS-Weather-Manager   
-
+ 
 Working with an external API in JavaScript.   
 
 Core Tasks  

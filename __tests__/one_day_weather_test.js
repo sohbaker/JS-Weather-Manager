@@ -14,6 +14,11 @@ describe('OneDayWeather', () => {
 
   it('can access the API for the current weather in London', async () => {
     const londonWeather = await weather.LondonOneDay();
-    expect(londonWeather).toEqual(6.54);
+    expect(londonWeather).toEqual(7.54);
+  });
+
+  it('can access the description for the current weather in London', async () => {
+    const londonWeather = await weather.LondonOneDayDescription();
+    expect(londonWeather).toEqual('Sky is Clear');
   });
 });
