@@ -1,11 +1,18 @@
-import { Weather } from './weather';
+import { OneDayWeather } from './one_day_weather';
 
-const weather = new Weather();
+const weatherOne = new OneDayWeather();
 
-async function getWeather() {
-  const temp = document.getElementById('display-weather');
-  temp.innerHTML = await weather.currentWeatherInLondon() + '&deg;C';
+async function getWeatherOne() {
+  const temp = document.getElementById('display-one-day-weather');
+  temp.innerHTML = await weatherOne.LondonOneDay() + '&deg;C';
   return temp;
 };
 
-getWeather();
+async function getDescriptionOne() {
+  const description = document.getElementById('display-one-day-description');
+  description.innerHTML = await weatherOne.LondonOneDayDescription();
+  return description;
+};
+
+getWeatherOne();
+getDescriptionOne();
