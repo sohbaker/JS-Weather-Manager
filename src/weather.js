@@ -34,4 +34,23 @@ export class Weather {
     return `${year}-${month}-${day}`;
   }
 
+  getDates() {
+    const addOneDay = 1000 * 60 * 60 * 24
+    const today = new Date();
+    const todayPlus1 = new Date(today.getTime() + (addOneDay));
+    const todayPlus2 = new Date(today.getTime() + (addOneDay * 2));
+    const todayPlus3 = new Date(today.getTime() + (addOneDay * 3));
+    const todayPlus4 = new Date(today.getTime() + (addOneDay * 4));
+
+    const nextFiveDays = [today, todayPlus1, todayPlus2, todayPlus3, todayPlus4]
+    let dateStrings = []
+
+    nextFiveDays.forEach(function(date) {
+      const dateToString = JSON.stringify(date)
+      dateStrings.push(dateToString.substring(1, 11))
+    });
+
+    return dateStrings
+  }
+
 };

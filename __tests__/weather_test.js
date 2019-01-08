@@ -27,8 +27,8 @@ describe('Weather', () => {
     expect(london5DayWeather.cnt).toEqual(40);
   });
 
-  it('can convert unix time to a string', async () => {
-    expect(weather.convertDate(1546948800)).toEqual('2019-01-08');
+  it('returns five dates as strings in an array', async () => {
+    expect(weather.getDates().length).toEqual(5);
   });
 
 });
