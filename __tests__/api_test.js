@@ -17,4 +17,9 @@ describe('Api', () => {
     const weatherOneDay = await api.oneDayApiCall();
     expect(weatherOneDay.list[0].name).toEqual('London');
   });
+
+  it('completes a weather api call for five days', async () => {
+    const weatherFiveDay = await api.fiveDayApiCall();
+    expect(weatherFiveDay.cnt).toEqual(40);
+  });
 })
