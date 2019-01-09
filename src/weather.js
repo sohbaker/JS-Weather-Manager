@@ -7,7 +7,7 @@ export class Weather {
     const json = await data.json();
     const oneDayTemp = json.list[0].main.temp;
     const oneDayDescription = json.list[0].weather[0].description;
-    const allLondonData = [oneDayTemp, oneDayDescription]
+    const allLondonData = [Math.round(oneDayTemp) + '\xB0C', oneDayDescription]
     return allLondonData;
   }
 
@@ -16,22 +16,6 @@ export class Weather {
     const json = await data.json();
     const allLondonData = json
     return allLondonData;
-  }
-
-  convertDate(unix_time) {
-    const date = new Date(unix_time * 1000)
-    let day = date.getDate();
-    let month = date.getMonth();
-    const year = date.getFullYear();
-
-    if(day < 10){
-      day = "0" + date.getDate()
-    };
-    if(month < 10){
-      month = "0" + (date.getMonth() + 1)
-    };
-
-    return `${year}-${month}-${day}`;
   }
 
   getDates() {
@@ -63,4 +47,59 @@ export class Weather {
     });
     return dateAndTimeArray;
   };
+
+  async getForecast() {
+    const forecastData = await this.londonFiveDayWeather();
+    const timestamps = this.getDates();
+    let collectData = []
+
+    forecastData.list.forEach(function(hash) {
+      timestamps.forEach(function(stamp) {
+        if(hash['dt_txt'] === stamp) {
+          let dateTime = hash['dt_txt'].split(' ')
+          let day = ""
+          let formattedDate = dateTime[0].split('-')
+          let formattedTime = dateTime[1].split(':')
+          let roundedTemp = Math.round(hash.main.temp)
+
+          switch (new Date(formattedDate[0], formattedDate[1] - 1, formattedDate[2]).getDay()) {
+            case 0:
+              day = "Sunday";
+              break;
+            case 1:
+              day = "Monday";
+              break;
+            case 2:
+              day = "Tuesday";
+              break;
+            case 3:
+              day = "Wednesday";
+              break;
+            case 4:
+              day = "Thursday";
+              break;
+            case 5:
+              day = "Friday";
+              break;
+            case 6:
+              day = "Saturday";
+              break;
+          }
+
+          if(roundedTemp === -0) {
+            roundedTemp = 0
+          }
+
+          collectData.push({
+            day: day,
+            date: `${formattedDate[2]}/${formattedDate[1]}/${formattedDate[0]}`,
+            time: `${formattedTime[0]}:${formattedTime[1]}`,
+            temp: roundedTemp + '\xB0C',
+            desc: hash.weather[0].description,
+          })
+        }
+      })
+    })
+    return collectData;
+  }
 };
