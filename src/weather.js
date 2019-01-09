@@ -7,7 +7,7 @@ export class Weather {
     const json = await data.json();
     const oneDayTemp = json.list[0].main.temp;
     const oneDayDescription = json.list[0].weather[0].description;
-    const allLondonData = [oneDayTemp, oneDayDescription]
+    const allLondonData = [oneDayTemp + '\xB0C', oneDayDescription]
     return allLondonData;
   }
 
@@ -86,7 +86,6 @@ export class Weather {
               break;
           }
 
-
           if(roundedTemp === -0) {
             roundedTemp = 0
           }
@@ -95,7 +94,7 @@ export class Weather {
             day: day,
             date: `${formattedDate[2]}/${formattedDate[1]}/${formattedDate[0]}`,
             time: `${formattedTime[0]}:${formattedTime[1]}`,
-            temp: roundedTemp + '°C',
+            temp: roundedTemp + '\xB0C',
             desc: hash.weather[0].description,
           })
         }
