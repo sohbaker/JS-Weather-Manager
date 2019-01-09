@@ -50,14 +50,17 @@ export class Weather {
 
   async getForecast() {
     const forecastData = await this.londonFiveDayWeather();
+    const timestamps = await this.getDates();
     let getInfo = []
 
     forecastData.list.forEach(function(hash) {
-      if(hash['dt_txt'] === '2019-01-10 00:00:00') {
-        getInfo.push(hash.main.temp);
-        getInfo.push(hash.weather[0].description);
-        getInfo.push(hash.dt_txt);
-      }
+      timestamps.forEach(function(stamp) {
+        if(hash['dt_txt'] === stamp) {
+          getInfo.push(hash.main.temp);
+          getInfo.push(hash.weather[0].description);
+          getInfo.push(hash.dt_txt);
+        }
+      })
     })
     return getInfo;
   }

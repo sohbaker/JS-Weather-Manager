@@ -32,9 +32,10 @@ describe('Weather', () => {
     expect(timestamp.length).toEqual(16);
   });
 
-  it('collects the temperature, weather description and date/timestamp for a specific date and time', async () => {
+  it('collects the temperature, weather description and date/timestamp for the next four days', async () => {
     const forecast = await weather.getForecast();
-    expect(forecast.length).toEqual(3);
+    console.log(forecast)
+    expect(forecast.length).toEqual(48);
   });
 
 });
