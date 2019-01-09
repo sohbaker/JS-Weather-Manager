@@ -58,8 +58,7 @@ export class Weather {
         getInfo.push(hash.weather[0].description);
         getInfo.push(hash.dt_txt);
       }
-      return getInfo;
     })
-    return getInfo[0];
+    return getInfo;
   }
 };
