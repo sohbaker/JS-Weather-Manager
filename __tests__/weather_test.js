@@ -28,6 +28,13 @@ describe('Weather', () => {
   });
 
   it('adds a specific timestamp to each date for the next four days in a new array', async () => {
-    expect(weather.getDates().length).toEqual(16);
+    const timestamp = await weather.getDates();
+    expect(timestamp.length).toEqual(16);
   });
+
+  it('returns the temperature for a specific date and time', async () => {
+    const forecast = await weather.getForecast();
+    expect(typeof forecast).toEqual('number');
+  });
+  
 });

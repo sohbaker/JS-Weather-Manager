@@ -18,22 +18,6 @@ export class Weather {
     return allLondonData;
   }
 
-  convertDate(unix_time) {
-    const date = new Date(unix_time * 1000)
-    let day = date.getDate();
-    let month = date.getMonth();
-    const year = date.getFullYear();
-
-    if(day < 10){
-      day = "0" + date.getDate()
-    };
-    if(month < 10){
-      month = "0" + (date.getMonth() + 1)
-    };
-
-    return `${year}-${month}-${day}`;
-  }
-
   getDates() {
     const addOneDay = 1000 * 60 * 60 * 24
     const today = new Date();
@@ -63,4 +47,19 @@ export class Weather {
     });
     return dateAndTimeArray;
   };
+
+  async getForecast() {
+    const forecastData = await this.londonFiveDayWeather();
+    let getInfo = []
+
+    forecastData.list.forEach(function(hash) {
+      if(hash['dt_txt'] === '2019-01-10 00:00:00') {
+        getInfo.push(hash.main.temp);
+        getInfo.push(hash.weather[0].description);
+        getInfo.push(hash.dt_txt);
+      }
+      return getInfo;
+    })
+    return getInfo[0];
+  }
 };
