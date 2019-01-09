@@ -56,9 +56,11 @@ export class Weather {
     forecastData.list.forEach(function(hash) {
       timestamps.forEach(function(stamp) {
         if(hash['dt_txt'] === stamp) {
-          getInfo.push(hash.main.temp);
-          getInfo.push(hash.weather[0].description);
-          getInfo.push(hash.dt_txt);
+          getInfo.push({
+            temp: hash.main.temp,
+            desc: hash.weather[0].description,
+            dt: hash.dt_txt,
+          })
         }
       })
     })
