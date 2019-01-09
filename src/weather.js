@@ -1,10 +1,10 @@
-const fetch = require("node-fetch");
-require('dotenv').config();
+import { Api } from './api';
+
+const callApi = new Api();
 
 export class Weather {
   async londonOneDayWeather() {
-    const data = await fetch('https://api.openweathermap.org/data/2.5/find?q=London,UK&units=metric&appid='+ process.env.API_KEY);
-    const json = await data.json();
+    const json =  await callApi.oneDayApiCall();
     const oneDayTemp = json.list[0].main.temp;
     const oneDayDescription = json.list[0].weather[0].description;
     const oneDayIcon = json.list[0].weather[0].icon;
@@ -13,8 +13,7 @@ export class Weather {
   }
 
   async londonFiveDayWeather() {
-    const data = await fetch('https://api.openweathermap.org/data/2.5/forecast?q=London,UK&units=metric&appid='+ process.env.API_KEY);
-    const json = await data.json();
+    const json = await callApi.fiveDayApiCall();
     const allLondonData = json
     return allLondonData;
   }

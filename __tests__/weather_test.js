@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
 import { Weather } from '../src/weather';
 
 describe('Weather', () => {
@@ -14,7 +14,7 @@ describe('Weather', () => {
 
   it('can access the temperature for the current weather in London', async () => {
     const londonWeather = await weather.londonOneDayWeather();
-    expect(typeof londonWeather[0]).toEqual('number');
+    expect(londonWeather[0]).toContain('\xB0');
   });
 
   it('can access the description for the current weather in London', async () => {
