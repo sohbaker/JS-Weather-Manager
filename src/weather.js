@@ -7,7 +7,8 @@ export class Weather {
     const json = await data.json();
     const oneDayTemp = json.list[0].main.temp;
     const oneDayDescription = json.list[0].weather[0].description;
-    const allLondonData = [Math.round(oneDayTemp) + '\xB0C', oneDayDescription]
+    const oneDayIcon = json.list[0].weather[0].icon;
+    const allLondonData = [Math.round(oneDayTemp) + '\xB0C', oneDayDescription, oneDayIcon]
     return allLondonData;
   }
 
@@ -55,8 +56,8 @@ export class Weather {
 
     forecastData.list.forEach(function(hash) {
       timestamps.forEach(function(stamp) {
-        if(hash['dt_txt'] === stamp) {
-          let dateTime = hash['dt_txt'].split(' ')
+        if(hash.dt_txt === stamp) {
+          let dateTime = hash.dt_txt.split(' ')
           let day = ""
           let formattedDate = dateTime[0].split('-')
           let formattedTime = dateTime[1].split(':')
@@ -95,6 +96,7 @@ export class Weather {
             date: `${formattedDate[2]}/${formattedDate[1]}/${formattedDate[0]}`,
             time: `${formattedTime[0]}:${formattedTime[1]}`,
             temp: roundedTemp + '\xB0C',
+            icon: hash.weather[0].icon,
             desc: hash.weather[0].description,
           })
         }

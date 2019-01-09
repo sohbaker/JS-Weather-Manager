@@ -5,9 +5,11 @@ const weather = new Weather();
 async function getWeatherOne() {
   const displayTemp = document.getElementById('one-day-weather');
   const displayDesc = document.getElementById('one-day-description');
+  const displayIcon = document.getElementById('one-day-icon')
   const data = await weather.londonOneDayWeather();
   displayTemp.innerHTML = data[0];
   displayDesc.innerHTML = data[1];
+  displayIcon.innerHTML = "<img src='http://openweathermap.org/img/w/" + data[2] + ".png'>"
 }
 
 async function getWeatherFive() {
@@ -22,25 +24,30 @@ async function displayForecast() {
   forecast.forEach((obj) =>  {
     let info = document.createElement("div")
 
-    let dayp = document.createElement("p")
-    dayp.innerHTML = obj.day
-    info.appendChild(dayp);
+    let day = document.createElement("p")
+    day.innerHTML = obj.day
+    info.appendChild(day);
 
-    let datep = document.createElement("p")
-    datep.innerHTML = obj.date
-    info.appendChild(datep);
+    let date = document.createElement("p")
+    date.innerHTML = obj.date
+    info.appendChild(date);
 
-    let timep = document.createElement("p")
-    timep.innerHTML = obj.time
-    info.appendChild(timep);
+    let time = document.createElement("p")
+    time.innerHTML = obj.time
+    info.appendChild(time);
 
-    let tempp = document.createElement("p")
-    tempp.innerHTML = obj.temp
-    info.appendChild(tempp);
+    let temp = document.createElement("p")
+    temp.innerHTML = obj.temp
+    info.appendChild(temp);
 
-    let descp = document.createElement("p")
-    descp.innerHTML = obj.desc
-    info.appendChild(descp);
+    let icon = document.createElement("p")
+    let iconUrl = "http://openweathermap.org/img/w/" + obj.icon + ".png";
+    icon.innerHTML = "<img src='" + iconUrl  + "'>";
+    info.appendChild(icon);
+
+    let desc = document.createElement("p")
+    desc.innerHTML = obj.desc
+    info.appendChild(desc);
 
     displayFourDays.appendChild(info);
   })
