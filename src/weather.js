@@ -7,7 +7,7 @@ export class Weather {
     const json = await data.json();
     const oneDayTemp = json.list[0].main.temp;
     const oneDayDescription = json.list[0].weather[0].description;
-    const allLondonData = [oneDayTemp + '\xB0C', oneDayDescription]
+    const allLondonData = [Math.round(oneDayTemp) + '\xB0C', oneDayDescription]
     return allLondonData;
   }
 
