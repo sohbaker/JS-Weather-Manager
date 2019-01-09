@@ -50,20 +50,30 @@ export class Weather {
 
   async getForecast() {
     const forecastData = await this.londonFiveDayWeather();
-    const timestamps = await this.getDates();
-    let getInfo = []
+    const timestamps = this.getDates();
+    let collectData = []
 
     forecastData.list.forEach(function(hash) {
       timestamps.forEach(function(stamp) {
         if(hash['dt_txt'] === stamp) {
-          getInfo.push({
-            temp: hash.main.temp,
+          let dateTime = hash['dt_txt'].split(' ')
+          let formattedDate = dateTime[0].split('-')
+          let formattedTime = dateTime[1].split(':')
+          let roundedTemp = Math.round(hash.main.temp)
+
+          if(roundedTemp === -0) {
+            roundedTemp = 0
+          }
+
+          collectData.push({
+            date: `${formattedDate[2]}/${formattedDate[1]}/${formattedDate[0]}`,
+            time: `${formattedTime[0]}:${formattedTime[1]}`,
+            temp: roundedTemp,
             desc: hash.weather[0].description,
-            dt: hash.dt_txt,
           })
         }
       })
     })
-    return getInfo;
+    return collectData;
   }
 };
