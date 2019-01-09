@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
 import { Weather } from '../src/weather';
 
 describe('Weather', () => {
