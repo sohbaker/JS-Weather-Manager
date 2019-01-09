@@ -34,7 +34,6 @@ describe('Weather', () => {
 
   it('collects the temperature, weather description and date/timestamp for the next four days', async () => {
     const forecast = await weather.getForecast();
-    console.log(forecast)
     expect(forecast.length).toEqual(16);
   });
 

@@ -57,23 +57,45 @@ export class Weather {
       timestamps.forEach(function(stamp) {
         if(hash['dt_txt'] === stamp) {
           let dateTime = hash['dt_txt'].split(' ')
-          let parts = dateTime[0].split('-')
-          let combineParts = new Date(parts[0], parts[1] - 1, parts[2]);
-          let day = combineParts.toDateString().split(' ')
-          let dayString = day[0]
+          let day = ""
           let formattedDate = dateTime[0].split('-')
           let formattedTime = dateTime[1].split(':')
           let roundedTemp = Math.round(hash.main.temp)
+
+          switch (new Date(formattedDate[0], formattedDate[1] - 1, formattedDate[2]).getDay()) {
+            case 0:
+              day = "Sunday";
+              break;
+            case 1:
+              day = "Monday";
+              break;
+            case 2:
+              day = "Tuesday";
+              break;
+            case 3:
+              day = "Wednesday";
+              break;
+            case 4:
+              day = "Thursday";
+              break;
+            case 5:
+              day = "Friday";
+              break;
+            case 6:
+              day = "Saturday";
+              break;
+          }
+
 
           if(roundedTemp === -0) {
             roundedTemp = 0
           }
 
           collectData.push({
-            day: dayString,
+            day: day,
             date: `${formattedDate[2]}/${formattedDate[1]}/${formattedDate[0]}`,
             time: `${formattedTime[0]}:${formattedTime[1]}`,
-            temp: roundedTemp,
+            temp: roundedTemp + '°C',
             desc: hash.weather[0].description,
           })
         }
