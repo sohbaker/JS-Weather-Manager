@@ -1,4 +1,5 @@
 import { Api } from './api';
+import moment from 'moment';
 
 const callApi = new Api();
 
@@ -60,48 +61,28 @@ export class Weather {
     const forecastData = await this.londonFiveDayWeather();
     const setTimestamps = this.getDates();
     const timestamps = ['00:00:00', '06:00:00', '12:00:00', '18:00:00']
-    let collectData = []
+    let firstResult = []
 
     forecastData.list.forEach(function(hash) {
       setTimestamps.forEach(function(stamp) {
         if(hash.dt_txt === stamp) {
           let dateTime = hash.dt_txt.split(' ')
           let day = ""
-          let formattedDate = dateTime[0].split('-')
-          let formattedTime = dateTime[1].split(':')
           let roundedTemp = Math.round(hash.main.temp)
 
-          switch (new Date(formattedDate[0], formattedDate[1] - 1, formattedDate[2]).getDay()) {
-            case 0:
-              day = "Sunday";
-              break;
-            case 1:
-              day = "Monday";
-              break;
-            case 2:
-              day = "Tuesday";
-              break;
-            case 3:
-              day = "Wednesday";
-              break;
-            case 4:
-              day = "Thursday";
-              break;
-            case 5:
-              day = "Friday";
-              break;
-            case 6:
-              day = "Saturday";
-              break;
-          }
+          moment.locale('en-gb');
+
+          let date = moment(dateTime[0]).format('L');
+          let listDay = moment(dateTime[0]).format('dddd');
+          let time = moment(hash.dt_txt).format('LT');
 
           if(roundedTemp === -0) {
             roundedTemp = 0;
           }
 
-          collectData.push({
-            day: day,
-            date: `${formattedDate[2]}/${formattedDate[1]}/${formattedDate[0]}`,
+          firstResult.push({
+            day: listDay,
+            date: date,
             dt: dateTime[0],
             data: []
           })
@@ -109,19 +90,23 @@ export class Weather {
       })
     })
 
-    let newResult = this.removeDuplicates(collectData, 'day');
+    let newResult = this.removeDuplicates(firstResult, 'day');
 
     forecastData.list.forEach(function(hash) {
       newResult.forEach(function(obj){
         let dateTime = hash.dt_txt.split(' ')
         let day = ""
-        let formattedDate = dateTime[0].split('-')
-        let formattedTime = dateTime[1].split(':')
         let roundedTemp = Math.round(hash.main.temp)
 
-        if(obj.dt === dateTime[0] && timestamps.includes(dateTime[1])){
+        moment.locale('en-gb');
+
+        let date = moment(dateTime[0]).format('L');
+        let listDay = moment(dateTime[0]).format('dddd');
+        let time = moment(hash.dt_txt).format('LT');
+
+        if(obj.dt === dateTime[0] && timestamps.includes(dateTime[1])) {
           obj.data.push({
-            time: `${formattedTime[0]}:${formattedTime[1]}`,
+            time: time,
             temp: roundedTemp + '\xB0C',
             icon: hash.weather[0].icon,
             desc: hash.weather[0].description,
@@ -129,8 +114,6 @@ export class Weather {
         }
       })
     })
-    console.log(newResult)
-    console.log('+++')
   return newResult;
   }
 };
