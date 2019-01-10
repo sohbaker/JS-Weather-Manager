@@ -48,13 +48,22 @@ export class Weather {
     return dateAndTimeArray;
   };
 
+  removeDuplicates(arr, key) {
+    const unique = arr
+      .map(e => e[key])
+      .map((e, i, final) => final.indexOf(e) === i && i)
+      .filter(e => arr[e]).map(e => arr[e]);
+    return unique;
+  }
+
   async getForecast() {
     const forecastData = await this.londonFiveDayWeather();
-    const timestamps = this.getDates();
+    const setTimestamps = this.getDates();
+    const timestamps = ['00:00:00', '06:00:00', '12:00:00', '18:00:00']
     let collectData = []
 
     forecastData.list.forEach(function(hash) {
-      timestamps.forEach(function(stamp) {
+      setTimestamps.forEach(function(stamp) {
         if(hash.dt_txt === stamp) {
           let dateTime = hash.dt_txt.split(' ')
           let day = ""
@@ -87,12 +96,31 @@ export class Weather {
           }
 
           if(roundedTemp === -0) {
-            roundedTemp = 0
+            roundedTemp = 0;
           }
 
           collectData.push({
             day: day,
             date: `${formattedDate[2]}/${formattedDate[1]}/${formattedDate[0]}`,
+            dt: dateTime[0],
+            data: []
+          })
+        }
+      })
+    })
+
+    let newResult = this.removeDuplicates(collectData, 'day');
+
+    forecastData.list.forEach(function(hash) {
+      newResult.forEach(function(obj){
+        let dateTime = hash.dt_txt.split(' ')
+        let day = ""
+        let formattedDate = dateTime[0].split('-')
+        let formattedTime = dateTime[1].split(':')
+        let roundedTemp = Math.round(hash.main.temp)
+
+        if(obj.dt === dateTime[0] && timestamps.includes(dateTime[1])){
+          obj.data.push({
             time: `${formattedTime[0]}:${formattedTime[1]}`,
             temp: roundedTemp + '\xB0C',
             icon: hash.weather[0].icon,
@@ -101,6 +129,8 @@ export class Weather {
         }
       })
     })
-    return collectData;
+    console.log(newResult)
+    console.log('+++')
+  return newResult;
   }
 };

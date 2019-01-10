@@ -1,4 +1,3 @@
-// const fetch = require("node-fetch");
 import { Weather } from '../src/weather';
 
 describe('Weather', () => {
@@ -34,7 +33,8 @@ describe('Weather', () => {
 
   it('collects the temperature, weather description and date/timestamp for the next four days', async () => {
     const forecast = await weather.getForecast();
-    expect(forecast.length).toEqual(16);
+    console.log(weather.getForecast())
+    expect(forecast.length).toEqual(4);
   });
 
 });

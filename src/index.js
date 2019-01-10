@@ -19,6 +19,7 @@ async function getWeatherFive() {
 
 async function displayForecast() {
   const forecast = await getWeatherFive()
+  console.log(forecast)
   const displayFourDays = document.getElementById('next-four-days')
 
   forecast.forEach((obj) =>  {
