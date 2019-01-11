@@ -25,11 +25,11 @@ async function displayForecast() {
 
   forecast.forEach((obj) =>  {
     let day = document.createElement("tr")
-    day.innerHTML = obj.day
+    day.innerHTML = "<td colspan=\"4\">" + obj.day + "</td>"
     table.appendChild(day);
 
     let date = document.createElement("tr")
-    date.innerHTML = obj.date
+    date.innerHTML = "<td colspan=\"4\">" + obj.date + "</td>"
     table.appendChild(date);
 
     let data = obj.data
