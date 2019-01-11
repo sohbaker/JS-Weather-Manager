@@ -22,17 +22,24 @@ h3 {
 }
 
 table {
-  border: 1px solid black;
   table-layout: fixed;
   width:75%;
   margin: 0 auto;
-  /* width: 500px; */
 }
 
-td, tr {
-  border: 1px solid black;
+td {
   width: 300px;
   font-size: 1em;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#table-four,#table-four td {
+  border: 1px solid black;
 }
 
 #day {
@@ -44,23 +51,3 @@ td, tr {
   font-size: 1.2em;
   color: green;
 }
-/*
-.temp-below-zero {
-
-}
-
-.temp-zero-nine {
-
-}
-
-.temp-nine-twenty {
-
-}
-
-.temp-twenty-thirty {
-
-}
-
-.temp-above-thirty {
-
-} */

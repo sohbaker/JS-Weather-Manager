@@ -37,6 +37,7 @@ async function displayForecast() {
   const forecast = await getWeatherFive()
   const displayFourDays = document.getElementById('next-four-days')
   let table = document.createElement("table")
+  table.setAttribute("id", "table-four")
 
   forecast.forEach((obj) =>  {
     let day = document.createElement("tr")

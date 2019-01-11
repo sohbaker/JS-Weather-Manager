@@ -4,6 +4,10 @@ import moment from 'moment';
 const callApi = new Api();
 
 export class Weather {
+  constructor() {
+    this.apiRequest = new Api();
+  }
+
   async londonOneDayWeather() {
     const json =  await callApi.oneDayApiCall();
     const oneDayTemp = json.list[0].main.temp;
