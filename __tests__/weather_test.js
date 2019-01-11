@@ -7,10 +7,15 @@ describe('Weather', () => {
     Api.mockClear();
   });
 
-  it('We can check for a new instance of the Weather Class', () => {
+  it('checks if weather class creates a new instance of api request class', () => {
     const weather = new Weather();
     expect(Api).toHaveBeenCalledTimes(1);
   });
+
+  it('checks for a new instance of api request', () => {
+    expect(Api).not.toHaveBeenCalled();
+  });
+
 
   // it('We can check for a new instance of the Weather Class', () => {
   //   const weather = new Api();
