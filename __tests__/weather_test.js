@@ -16,12 +16,20 @@ describe('Weather', () => {
     expect(Api).not.toHaveBeenCalled();
   });
 
+  it('checks whether londonOneDayWeather function makes an API request', async () => {
 
-  // it('We can check for a new instance of the Weather Class', () => {
-  //   const weather = new Api();
-  //   expect(Api).toHaveBeenCalledTimes(1);
-  // });
+  const weather = new Weather();
+  expect(Api).toHaveBeenCalledTimes(1);
 
+  weather.londonOneDayWeather();
+
+  const mockApiRequestInstance = Api.mock.instances[0];
+  const mockOneDayApiCall = mockApiRequestInstance.oneDayApiCall;
+
+  expect(mockOneDayApiCall).toHaveBeenCalledTimes(1);
+});
+
+  // <-------------------------->
   // let weather;
   // beforeEach(() => {
   //   weather = new Weather();
