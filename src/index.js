@@ -3,13 +3,23 @@ import { Weather } from './weather';
 const weather = new Weather();
 
 async function getWeatherOne() {
-  const displayTemp = document.getElementById('one-day-weather');
-  const displayDesc = document.getElementById('one-day-description');
-  const displayIcon = document.getElementById('one-day-icon')
+  const displayOneDay = document.getElementById('current-day');
   const data = await weather.londonOneDayWeather();
-  displayTemp.innerHTML = data[0];
-  displayDesc.innerHTML = data[1];
+  let table = document.createElement("table")
+
+  let displayTemp = document.createElement("tr")
+  displayTemp.innerHTML = data[0]
+  table.appendChild(displayTemp);
+
+  let displayIcon = document.createElement("tr")
   displayIcon.innerHTML = "<img src='http://openweathermap.org/img/w/" + data[2] + ".png'>"
+  table.appendChild(displayIcon);
+
+  let displayDesc = document.createElement("tr")
+  displayDesc.innerHTML = data[1]
+  table.appendChild(displayDesc);
+
+  displayOneDay.appendChild(table);
 }
 
 async function getWeatherFive() {
@@ -19,16 +29,17 @@ async function getWeatherFive() {
 
 async function displayForecast() {
   const forecast = await getWeatherFive()
-
   const displayFourDays = document.getElementById('next-four-days')
   let table = document.createElement("table")
 
   forecast.forEach((obj) =>  {
     let day = document.createElement("tr")
+    day.setAttribute("id", "day")
     day.innerHTML = "<td colspan=\"4\">" + obj.day + "</td>"
     table.appendChild(day);
 
     let date = document.createElement("tr")
+    date.setAttribute("id", "date")
     date.innerHTML = "<td colspan=\"4\">" + obj.date + "</td>"
     table.appendChild(date);
 
