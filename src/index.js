@@ -33,28 +33,34 @@ async function displayForecast() {
     table.appendChild(date);
 
     let data = obj.data
-    let dataRow = document.createElement("tr")
+    let timeRow = document.createElement("tr")
+    let tempRow = document.createElement("tr")
+    let iconRow = document.createElement("tr")
+    let descriptionRow = document.createElement("tr")
 
       data.forEach((item) => {
         let time = document.createElement("td")
         time.innerHTML = item.time
-        dataRow.appendChild(time);
+        timeRow.appendChild(time);
 
         let temp = document.createElement("td")
         temp.innerHTML = item.temp
-        dataRow.appendChild(temp);
+        tempRow.appendChild(temp);
 
         let icon = document.createElement("td")
         let iconUrl = "http://openweathermap.org/img/w/" + item.icon + ".png";
         icon.innerHTML = "<img src='" + iconUrl  + "'>";
-        dataRow.appendChild(icon);
+        iconRow.appendChild(icon);
 
         let desc = document.createElement("td")
         desc.innerHTML = item.desc
-        dataRow.appendChild(desc);
+        descriptionRow.appendChild(desc);
       })
 
-    table.appendChild(dataRow);
+    table.appendChild(timeRow);
+    table.appendChild(tempRow);
+    table.appendChild(iconRow);
+    table.appendChild(descriptionRow);
     displayFourDays.appendChild(table);
   })
 }
