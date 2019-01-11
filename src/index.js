@@ -68,10 +68,14 @@ async function displayForecast() {
         descriptionRow.appendChild(desc);
       })
 
+    let space = document.createElement("tr")
+    space.innerHTML = "<br>"
+
     table.appendChild(timeRow);
     table.appendChild(tempRow);
     table.appendChild(iconRow);
     table.appendChild(descriptionRow);
+    table.appendChild(space);
     displayFourDays.appendChild(table);
   })
 }
