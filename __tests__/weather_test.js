@@ -17,17 +17,28 @@ describe('Weather', () => {
   });
 
   it('checks whether londonOneDayWeather function makes an API request', async () => {
+    const weather = new Weather();
+    expect(Api).toHaveBeenCalledTimes(1);
 
-  const weather = new Weather();
-  expect(Api).toHaveBeenCalledTimes(1);
+    weather.londonOneDayWeather();
 
-  weather.londonOneDayWeather();
+    const mockApiRequestInstance = Api.mock.instances[0];
+    const mockOneDayApiCall = mockApiRequestInstance.oneDayApiCall;
 
-  const mockApiRequestInstance = Api.mock.instances[0];
-  const mockOneDayApiCall = mockApiRequestInstance.oneDayApiCall;
+    expect(mockOneDayApiCall).toHaveBeenCalledTimes(1);
+  });
 
-  expect(mockOneDayApiCall).toHaveBeenCalledTimes(1);
-});
+  it('checks whether londonFiveDayWeather function makes an API request', async () => {
+    const weather = new Weather();
+    expect(Api).toHaveBeenCalledTimes(1);
+
+    weather.londonFiveDayWeather();
+
+    const mockApiRequestInstance = Api.mock.instances[0];
+    const mockFiveDayApiCall = mockApiRequestInstance.fiveDayApiCall;
+
+    expect(mockFiveDayApiCall).toHaveBeenCalledTimes(1);
+  });
 
   // <-------------------------->
   // let weather;
