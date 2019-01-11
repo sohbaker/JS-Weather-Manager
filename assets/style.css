@@ -13,13 +13,37 @@ body {
   height: 100%;
   background-image: url("background.png");
   background-size: cover;
+  text-align: center;
 }
 
-h1 {
-  text-align: center;
+#day {
   font-size: 1.5em;
+  color: green;
 }
-/* 
+
+#date {
+  font-size: 1em;
+  color: green;
+}
+
+h3 {
+  text-align: center;
+  font-size: 2em;
+}
+
+table {
+  border: 1px solid black;
+  table-layout: fixed;
+  width:75%;
+  margin: 0 auto;
+  /* width: 500px; */
+}
+
+td {
+  border: 1px solid black;
+  width: 300px;
+}
+/*
 .temp-below-zero {
 
 }
