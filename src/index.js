@@ -7,17 +7,23 @@ async function getWeatherOne() {
   const data = await weather.londonOneDayWeather();
   let table = document.createElement("table")
 
-  let displayTemp = document.createElement("tr")
+  let tempRow = document.createElement("tr")
+  let displayTemp = document.createElement("td")
   displayTemp.innerHTML = data[0]
-  table.appendChild(displayTemp);
+  tempRow.appendChild(displayTemp)
+  table.appendChild(tempRow);
 
-  let displayIcon = document.createElement("tr")
+  let iconRow = document.createElement("tr")
+  let displayIcon = document.createElement("td")
   displayIcon.innerHTML = "<img src='http://openweathermap.org/img/w/" + data[2] + ".png'>"
-  table.appendChild(displayIcon);
+  iconRow.appendChild(displayIcon)
+  table.appendChild(iconRow);
 
-  let displayDesc = document.createElement("tr")
+  let descRow = document.createElement("tr")
+  let displayDesc = document.createElement("td")
   displayDesc.innerHTML = data[1]
-  table.appendChild(displayDesc);
+  descRow.appendChild(displayDesc)
+  table.appendChild(descRow);
 
   displayOneDay.appendChild(table);
 }

@@ -16,19 +16,9 @@ body {
   text-align: center;
 }
 
-#day {
-  font-size: 1.5em;
-  color: green;
-}
-
-#date {
-  font-size: 1em;
-  color: green;
-}
-
 h3 {
   text-align: center;
-  font-size: 2em;
+  font-size: 1.8em;
 }
 
 table {
@@ -39,9 +29,20 @@ table {
   /* width: 500px; */
 }
 
-td {
+td, tr {
   border: 1px solid black;
   width: 300px;
+  font-size: 1em;
+}
+
+#day {
+  font-size: 1.5em;
+  color: green;
+}
+
+#date {
+  font-size: 1.2em;
+  color: green;
 }
 /*
 .temp-below-zero {
