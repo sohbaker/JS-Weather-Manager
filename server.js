@@ -11,8 +11,8 @@ app.get('*',  (req, res) => {
   res.sendFile(path.resolve(__dirname, './index.html'));
 });
 
-if (process.env.NODE_ENV === 'development') {
-  require('dotenv').config()
-};
+// if (process.env.NODE_ENV === 'development') {
+//   require('dotenv').config()
+// };
 
 app.listen(port);

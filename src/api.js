@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-require('dotenv').config();
+// require('dotenv').config();
 
 export class Api {
  async oneDayApiCall() {
