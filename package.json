@@ -6,7 +6,9 @@
   "scripts": {
     "lint": "eslint src/*.js",
     "test": "jest",
-    "watch": "node_modules/.bin/webpack --watch"
+    "watch": "node_modules/.bin/webpack --watch",
+    "start": "node server.js",
+    "heroku-postbuild": "webpack -p"
   },
   "repository": {
     "type": "git",
@@ -34,6 +36,7 @@
   "dependencies": {
     "dotenv": "^6.2.0",
     "dotenv-webpack": "^1.6.0",
+    "express": "^4.16.4",
     "fetch": "^1.1.0",
     "locales": "0.0.2",
     "lodash": "^4.17.11",
