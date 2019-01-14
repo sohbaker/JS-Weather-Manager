@@ -5,7 +5,7 @@ export class Weather {
   constructor() {
     this.apiRequest = new Api();
   }
-
+  
   async londonOneDayWeather() {
     const json =  await this.apiRequest.oneDayApiCall();
     const oneDayTemp = json.list[0].main.temp;
