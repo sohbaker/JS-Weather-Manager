@@ -1,5 +1,5 @@
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
+// const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -11,7 +11,7 @@ module.exports = {
   node: {
     fs: 'empty'
   },
-  plugins: [
-    new Dotenv()
-  ]
+  // plugins: [
+  //   new Dotenv()
+  // ]
 };

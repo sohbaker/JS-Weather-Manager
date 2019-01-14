@@ -11,7 +11,7 @@ app.get('*',  (req, res) => {
   res.sendFile(path.resolve(__dirname, './index.html'));
 });
 
-if (process.env.API_KEY === 'production') {
+if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 };
 
