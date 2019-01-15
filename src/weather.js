@@ -6,22 +6,18 @@ export class Weather {
     this.apiRequest = new ApiRequest();
   }
 
-  async londonOneDayWeather() {
-    const json =  await this.apiRequest.oneDayApiCall();
-    const oneDayTemp = json.list[0].main.temp;
-    const oneDayDescription = json.list[0].weather[0].description;
-    const oneDayIcon = json.list[0].weather[0].icon;
-    const allLondonData = [Math.round(oneDayTemp) + '\xB0C', oneDayDescription, oneDayIcon]
+  async currentDayWeather() {
+    const todayWeather =  await this.apiRequest.weatherOneDayCall();
+    todayWeather.temp = this.formatTemperature(todayWeather.temp)
+    return todayWeather;
+  }
+
+  async nextFourDaysWeather() {
+    const allLondonData = await this.apiRequest.weatherFourDayCall();
     return allLondonData;
   }
 
-  async londonFiveDayWeather() {
-    const json = await this.apiRequest.fiveDayApiCall();
-    const allLondonData = json
-    return allLondonData;
-  }
-
-  getDates() {
+  getDatesAndTimes() {
     const addOneDay = 1000 * 60 * 60 * 24
     const today = new Date();
     const todayPlus1 = new Date(today.getTime() + (addOneDay));
@@ -59,9 +55,19 @@ export class Weather {
     return unique;
   }
 
+  formatTemperature(temperature) {
+   let roundedTemp = Math.round(temperature)
+
+    if(Object.is(roundedTemp, -0)) {
+      roundedTemp = 0;
+    }
+    temperature = `${roundedTemp}\xB0C`;
+    return temperature;
+  }
+
   async getForecast() {
-    const forecastData = await this.londonFiveDayWeather();
-    const setTimestamps = this.getDates();
+    const forecastData = await this.nextFourDaysWeather();
+    const setTimestamps = this.getDatesAndTimes();
     const timestamps = ['00:00:00', '06:00:00', '12:00:00', '18:00:00']
     let firstResult = []
 
@@ -70,17 +76,12 @@ export class Weather {
         if(hash.dt_txt === stamp) {
           let dateTime = hash.dt_txt.split(' ')
           let day = ""
-          let roundedTemp = Math.round(hash.main.temp)
 
           moment.locale('en-gb');
 
           let date = moment(dateTime[0]).format('L');
           let listDay = moment(dateTime[0]).format('dddd');
           let time = moment(hash.dt_txt).format('LT');
-
-          if(roundedTemp === -0) {
-            roundedTemp = 0;
-          }
 
           firstResult.push({
             day: listDay,
@@ -98,18 +99,16 @@ export class Weather {
       newResult.forEach(function(obj){
         let dateTime = hash.dt_txt.split(' ')
         let day = ""
-        let roundedTemp = Math.round(hash.main.temp)
+        let temp = hash.main.temp
 
         moment.locale('en-gb');
 
-        let date = moment(dateTime[0]).format('L');
-        let listDay = moment(dateTime[0]).format('dddd');
         let time = moment(hash.dt_txt).format('LT');
 
         if(obj.dt === dateTime[0] && timestamps.includes(dateTime[1])) {
           obj.data.push({
             time: time,
-            temp: roundedTemp + '\xB0C',
+            temp: temp,
             icon: hash.weather[0].icon,
             desc: hash.weather[0].description,
           })

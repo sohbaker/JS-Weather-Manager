@@ -4,24 +4,24 @@ const weather = new Weather();
 
 async function getWeatherOne() {
   const displayOneDay = document.getElementById('current-day');
-  const data = await weather.londonOneDayWeather();
+  const data = await weather.currentDayWeather();
   let table = document.createElement("table")
 
   let tempRow = document.createElement("tr")
   let displayTemp = document.createElement("td")
-  displayTemp.innerHTML = data[0]
+  displayTemp.innerHTML = data.temp
   tempRow.appendChild(displayTemp)
   table.appendChild(tempRow);
 
   let iconRow = document.createElement("tr")
   let displayIcon = document.createElement("td")
-  displayIcon.innerHTML = "<img src='http://openweathermap.org/img/w/" + data[2] + ".png'>"
+  displayIcon.innerHTML = "<img src='http://openweathermap.org/img/w/" + data.icon + ".png'>"
   iconRow.appendChild(displayIcon)
   table.appendChild(iconRow);
 
   let descRow = document.createElement("tr")
   let displayDesc = document.createElement("td")
-  displayDesc.innerHTML = data[1]
+  displayDesc.innerHTML = data.description
   descRow.appendChild(displayDesc)
   table.appendChild(descRow);
 
@@ -29,12 +29,12 @@ async function getWeatherOne() {
 }
 
 async function getWeatherFive() {
-  const data = await weather.getForecast();
+  const data = await weather.nextFourDaysWeather();
   return data;
 }
 
 async function displayForecast() {
-  const forecast = await getWeatherFive()
+  const forecast = await weather.getForecast()
   const displayFourDays = document.getElementById('next-four-days')
   let table = document.createElement("table")
   table.setAttribute("id", "table-four")
