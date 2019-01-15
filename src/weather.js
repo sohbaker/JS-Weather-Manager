@@ -61,8 +61,7 @@ export class Weather {
     if(Object.is(roundedTemp, -0)) {
       roundedTemp = 0;
     }
-    temperature = `${roundedTemp}\xB0C`;
-    return temperature;
+    return roundedTemp;
   }
 
   async getForecast() {

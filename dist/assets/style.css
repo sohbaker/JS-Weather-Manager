@@ -27,6 +27,8 @@ table {
   width:75%;
   margin: 0 auto;
   margin-bottom: 6%;
+  background-color: white;
+  border-radius: 10px;
 }
 
 td {
@@ -40,9 +42,9 @@ td {
   align-items: center;
 }
 
-#table-four,#table-four td {
+/* #table-four,#table-four td {
   border: 1px solid black;
-}
+} */
 
 #day {
   font-size: 1.5em;
@@ -53,3 +55,7 @@ td {
   font-size: 1.2em;
   color: green;
 }
+
+/* .temp {
+  color: red;
+} */
