@@ -1,11 +1,11 @@
-import { Api } from './api';
+import { ApiRequest } from './api_request';
 import moment from 'moment';
 
 export class Weather {
   constructor() {
-    this.apiRequest = new Api();
+    this.apiRequest = new ApiRequest();
   }
-  
+
   async londonOneDayWeather() {
     const json =  await this.apiRequest.oneDayApiCall();
     const oneDayTemp = json.list[0].main.temp;

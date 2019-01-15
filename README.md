@@ -7,7 +7,7 @@ Core Tasks
 - [x] Show London's 5 day forecast on the page  
 - [x] Abstract away API call logic into it's own class  
 - [x] Stub out API calls in tests (Jest will help you here - https://jestjs.io/docs/en/tutorial-async)  
-- Deploy to Heroku  
+- [x] Deploy to Heroku  
 
 Stretch Goals  
 - Select a city from a list, and display the weather for it  
