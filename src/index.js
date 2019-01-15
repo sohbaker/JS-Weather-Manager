@@ -25,6 +25,9 @@ async function getWeatherOne() {
   descRow.appendChild(displayDesc)
   table.appendChild(descRow);
 
+  const backgroundImage = `url('./assets/${data.condition}.png')`;
+  document.body.style.backgroundImage = backgroundImage;
+
   displayOneDay.appendChild(table);
 }
 

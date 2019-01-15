@@ -11,7 +11,6 @@ body {
   color: #222;
   font-family: 'Roboto', sans-serif;
   height: 100%;
-  background-image: url("weather.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
