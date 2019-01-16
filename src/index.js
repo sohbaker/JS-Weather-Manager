@@ -14,7 +14,7 @@ async function getWeatherOne() {
   let temp = document.createElement("td")
   temp.setAttribute("class", "temp")
   const tempCell = document.getElementsByClassName('temp');
-  temp.innerHTML = data.temp
+  temp.innerHTML = `${data.temp}\xB0C`
   temp.style.color = styleTemperature(data.temp)
   tempRow.appendChild(temp)
   table.appendChild(tempRow);
@@ -96,8 +96,7 @@ async function displayForecast() {
         let temp = document.createElement("td")
         temp.setAttribute("class", "temp")
         let temperature = item.temp
-        // tempCell.style.color = styleTemperature(item.temp)
-        temp.style.color = styleTemperature(data.temp)
+        temp.style.color = styleTemperature(temperature)
         temp.innerHTML = `${temperature}\xB0C`;
         tempRow.appendChild(temp);
 

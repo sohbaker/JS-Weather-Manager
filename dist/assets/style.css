@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:500,700);
+@import url(https://fonts.googleapis.com/css?family=Teko);
 
 html {
   color: #222;
@@ -9,7 +9,7 @@ html {
 
 body {
   color: #222;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Teko', sans-serif;
   height: 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -42,10 +42,6 @@ td {
   align-items: center;
 }
 
-/* #table-four,#table-four td {
-  border: 1px solid black;
-} */
-
 #day {
   font-size: 1.5em;
   color: green;
@@ -55,7 +51,3 @@ td {
   font-size: 1.2em;
   color: green;
 }
-
-/* .temp {
-  color: red;
-} */

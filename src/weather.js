@@ -56,7 +56,7 @@ export class Weather {
   }
 
   formatTemperature(temperature) {
-   let roundedTemp = Math.round(temperature)
+   let roundedTemp = Math.round(temperature);
 
     if(Object.is(roundedTemp, -0)) {
       roundedTemp = 0;
@@ -98,16 +98,14 @@ export class Weather {
       newResult.forEach(function(obj){
         let dateTime = hash.dt_txt.split(' ')
         let day = ""
-        let temp = hash.main.temp
 
         moment.locale('en-gb');
-
         let time = moment(hash.dt_txt).format('LT');
 
         if(obj.dt === dateTime[0] && timestamps.includes(dateTime[1])) {
           obj.data.push({
             time: time,
-            temp: temp,
+            temp: Math.round(hash.main.temp),
             icon: hash.weather[0].icon,
             desc: hash.weather[0].description,
           })
