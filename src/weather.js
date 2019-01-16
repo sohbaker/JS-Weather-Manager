@@ -8,7 +8,7 @@ export class Weather {
 
   async currentDayWeather() {
     const todayWeather =  await this.apiRequest.weatherOneDayCall();
-    todayWeather.temp = this.formatTemperature(todayWeather.temp)
+    todayWeather.temp = Math.round(todayWeather.temp)
     return todayWeather;
   }
 
@@ -55,19 +55,10 @@ export class Weather {
     return unique;
   }
 
-  formatTemperature(temperature) {
-   let roundedTemp = Math.round(temperature);
-
-    if(Object.is(roundedTemp, -0)) {
-      roundedTemp = 0;
-    }
-    return roundedTemp;
-  }
-
   async getForecast() {
     const forecastData = await this.nextFourDaysWeather();
     const setTimestamps = this.getDatesAndTimes();
-    const timestamps = ['00:00:00', '06:00:00', '12:00:00', '18:00:00']
+    const times = ['00:00:00', '06:00:00', '12:00:00', '18:00:00']
     let firstResult = []
 
     forecastData.list.forEach(function(hash) {
@@ -75,9 +66,7 @@ export class Weather {
         if(hash.dt_txt === stamp) {
           let dateTime = hash.dt_txt.split(' ')
           let day = ""
-
           moment.locale('en-gb');
-
           let date = moment(dateTime[0]).format('L');
           let listDay = moment(dateTime[0]).format('dddd');
           let time = moment(hash.dt_txt).format('LT');
@@ -95,14 +84,13 @@ export class Weather {
     let newResult = this.removeDuplicates(firstResult, 'day');
 
     forecastData.list.forEach(function(hash) {
-      newResult.forEach(function(obj){
+      newResult.forEach(function(obj) {
         let dateTime = hash.dt_txt.split(' ')
         let day = ""
-
         moment.locale('en-gb');
         let time = moment(hash.dt_txt).format('LT');
 
-        if(obj.dt === dateTime[0] && timestamps.includes(dateTime[1])) {
+        if(obj.dt === dateTime[0] && times.includes(dateTime[1])) {
           obj.data.push({
             time: time,
             temp: Math.round(hash.main.temp),

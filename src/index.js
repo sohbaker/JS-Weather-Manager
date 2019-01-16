@@ -4,35 +4,26 @@ const weather = new Weather();
 
 async function getWeatherOne() {
   const displayOneDay = document.getElementById('current-day');
+  displayOneDay.setAttribute("class", "flex-container")
   const data = await weather.currentDayWeather();
-  console.log(data.conditionID)
   const backgroundImage = setBackground(data.conditionID);
   document.body.style.backgroundImage = backgroundImage;
 
-  let table = document.createElement("table");
-
-  let tempRow = document.createElement("tr")
-  let temp = document.createElement("td")
-  temp.setAttribute("class", "temp")
-  const tempCell = document.getElementsByClassName('temp');
+  let temp = document.createElement("p")
+  temp.setAttribute("id","today-temp")
   temp.innerHTML = `${data.temp}\xB0C`
   temp.style.color = styleTemperature(data.temp)
-  tempRow.appendChild(temp)
-  table.appendChild(tempRow);
+  displayOneDay.appendChild(temp);
 
-  let iconRow = document.createElement("tr")
-  let displayIcon = document.createElement("td")
-  displayIcon.innerHTML = "<img src='http://openweathermap.org/img/w/" + data.icon + ".png'>"
-  iconRow.appendChild(displayIcon)
-  table.appendChild(iconRow);
+  let icon = document.createElement("p")
+  icon.setAttribute("id","today-icon")
+  icon.innerHTML = "<img src='http://openweathermap.org/img/w/" + data.icon + ".png'>"
+  displayOneDay.appendChild(icon);
 
-  let descRow = document.createElement("tr")
-  let displayDesc = document.createElement("td")
-  displayDesc.innerHTML = data.description
-  descRow.appendChild(displayDesc)
-  table.appendChild(descRow);
-
-  displayOneDay.appendChild(table);
+  let desc = document.createElement("p")
+  desc.setAttribute("id","today-description")
+  desc.innerHTML = data.description
+  displayOneDay.appendChild(desc);
 };
 
 async function getWeatherFive() {
@@ -43,26 +34,26 @@ async function getWeatherFive() {
 function setBackground(condition) {
   let cssImageUrl = '';
   switch (true) {
-    case (condition < 300):
-      cssImageUrl = `url('./assets/Thunderstorm.png')`;
+    case (condition >= 200 && condition < 300):
+      cssImageUrl = "url('./assets/Thunderstorm.png')";
       break;
     case (condition >= 300 && condition < 500):
-      cssImageUrl = `url('./assets/Drizzle.png')`;
+      cssImageUrl = "url('./assets/Drizzle.png')";
       break;
     case (condition >= 500 && condition < 600):
-      cssImageUrl = `url('./assets/Rain.png')`;
+      cssImageUrl = "url('./assets/Rain.png')";
       break;
     case (condition >= 600 && condition < 700):
-      cssImageUrl = `url('./assets/Snow.png')`;
+      cssImageUrl = "url('./assets/Snow.png')";
       break;
     case (condition >= 700 && condition < 800):
-      cssImageUrl = `url('./assets/Atmosphere.png')`;
+      cssImageUrl = "url('./assets/Atmosphere.png')";
       break;
     case (condition === 800):
-      cssImageUrl = `url('./assets/Clear.png')`;
+      cssImageUrl = "url('./assets/Clear.png')";
       break;
-    case (condition > 800):
-      cssImageUrl = `url('./assets/Clouds.png')`;
+    case (condition > 800 && condition < 805):
+      cssImageUrl = "url('./assets/Clouds.png')";
       break;
     default:
       cssImageUrl = `url('./assets/background.png')`;
@@ -75,19 +66,19 @@ function styleTemperature(temperature) {
   let color = '';
   switch (true) {
     case (temperature < 0):
-      color = '#00CED1';
+      color = '#31C5F4';
       break;
     case (temperature >=0 && temperature < 9):
       color = '#66CDAA';
       break;
     case (temperature >=9 && temperature < 20):
-      color = '#DEB887';
+      color = '#E2B171';
       break;
     case (temperature >=20 && temperature < 30):
-      color = '#FFD700';
+      color = '#F1CF17';
       break;
     case (temperature > 30):
-      color = '#FF4500';
+      color = '#E78D1A';
       break;
     default:
       color = 'black';
@@ -100,8 +91,6 @@ async function displayForecast() {
   const forecast = await weather.getForecast()
   const displayFourDays = document.getElementById('next-four-days')
   let table = document.createElement("table")
-  table.setAttribute("id", "table-four")
-  const tempCell = document.getElementById('temp');
 
   forecast.forEach((obj) =>  {
     let day = document.createElement("tr")
@@ -126,7 +115,6 @@ async function displayForecast() {
         timeRow.appendChild(time);
 
         let temp = document.createElement("td")
-        temp.setAttribute("class", "temp")
         let temperature = item.temp
         temp.style.color = styleTemperature(temperature)
         temp.innerHTML = `${temperature}\xB0C`;
@@ -142,14 +130,14 @@ async function displayForecast() {
         descriptionRow.appendChild(desc);
       })
 
-    let space = document.createElement("tr")
-    space.innerHTML = "<br>"
+    let emptyRow = document.createElement("tr")
+    emptyRow.innerHTML = "<br>"
 
     table.appendChild(timeRow);
     table.appendChild(tempRow);
     table.appendChild(iconRow);
     table.appendChild(descriptionRow);
-    table.appendChild(space);
+    table.appendChild(emptyRow);
     displayFourDays.appendChild(table);
   })
 }
