@@ -4,40 +4,72 @@ const weather = new Weather();
 
 async function getWeatherOne() {
   const displayOneDay = document.getElementById('current-day');
-  const data = await weather.londonOneDayWeather();
-  let table = document.createElement("table")
+  const data = await weather.currentDayWeather();
+  const backgroundImage = `url('./assets/${data.condition}.png')`;
+  document.body.style.backgroundImage = backgroundImage;
+
+  let table = document.createElement("table");
 
   let tempRow = document.createElement("tr")
-  let displayTemp = document.createElement("td")
-  displayTemp.innerHTML = data[0]
-  tempRow.appendChild(displayTemp)
+  let temp = document.createElement("td")
+  temp.setAttribute("class", "temp")
+  const tempCell = document.getElementsByClassName('temp');
+  temp.innerHTML = `${data.temp}\xB0C`
+  temp.style.color = styleTemperature(data.temp)
+  tempRow.appendChild(temp)
   table.appendChild(tempRow);
 
   let iconRow = document.createElement("tr")
   let displayIcon = document.createElement("td")
-  displayIcon.innerHTML = "<img src='http://openweathermap.org/img/w/" + data[2] + ".png'>"
+  displayIcon.innerHTML = "<img src='http://openweathermap.org/img/w/" + data.icon + ".png'>"
   iconRow.appendChild(displayIcon)
   table.appendChild(iconRow);
 
   let descRow = document.createElement("tr")
   let displayDesc = document.createElement("td")
-  displayDesc.innerHTML = data[1]
+  displayDesc.innerHTML = data.description
   descRow.appendChild(displayDesc)
   table.appendChild(descRow);
 
   displayOneDay.appendChild(table);
-}
+};
 
 async function getWeatherFive() {
-  const data = await weather.getForecast();
+  const data = await weather.nextFourDaysWeather();
   return data;
+};
+
+function styleTemperature(temperature) {
+  let color = '';
+  switch (true) {
+    case (temperature < 0):
+      color = '#00CED1';
+      break;
+    case (temperature >=0 && temperature < 9):
+      color = '#66CDAA';
+      break;
+    case (temperature >=9 && temperature < 20):
+      color = '#DEB887';
+      break;
+    case (temperature >=20 && temperature < 30):
+      color = '#FFD700';
+      break;
+    case (temperature > 30):
+      color = '#FF4500';
+      break;
+    default:
+      color = 'black';
+      break;
+  }
+  return color;
 }
 
 async function displayForecast() {
-  const forecast = await getWeatherFive()
+  const forecast = await weather.getForecast()
   const displayFourDays = document.getElementById('next-four-days')
   let table = document.createElement("table")
   table.setAttribute("id", "table-four")
+  const tempCell = document.getElementById('temp');
 
   forecast.forEach((obj) =>  {
     let day = document.createElement("tr")
@@ -62,7 +94,10 @@ async function displayForecast() {
         timeRow.appendChild(time);
 
         let temp = document.createElement("td")
-        temp.innerHTML = item.temp
+        temp.setAttribute("class", "temp")
+        let temperature = item.temp
+        temp.style.color = styleTemperature(temperature)
+        temp.innerHTML = `${temperature}\xB0C`;
         tempRow.appendChild(temp);
 
         let icon = document.createElement("td")

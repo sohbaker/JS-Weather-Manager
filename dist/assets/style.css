@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:500,700);
+@import url(https://fonts.googleapis.com/css?family=Teko);
 
 html {
   color: #222;
@@ -9,9 +9,10 @@ html {
 
 body {
   color: #222;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Teko', sans-serif;
   height: 100%;
-  background-image: url("background.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
   text-align: center;
 }
@@ -25,6 +26,9 @@ table {
   table-layout: fixed;
   width:75%;
   margin: 0 auto;
+  margin-bottom: 6%;
+  background-color: white;
+  border-radius: 10px;
 }
 
 td {
@@ -36,10 +40,6 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#table-four,#table-four td {
-  border: 1px solid black;
 }
 
 #day {

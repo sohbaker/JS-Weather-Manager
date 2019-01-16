@@ -2,15 +2,36 @@ const fetch = require("node-fetch");
 require('dotenv').config();
 
 export class ApiRequest {
- async oneDayApiCall() {
-   const call = await fetch('https://api.openweathermap.org/data/2.5/find?q=London,UK&units=metric&appid='+ process.env.API_KEY);
-   const data = await call.json();
-   return data;
- }
+  async getWeatherData(callType) {
+    const url = `https://api.openweathermap.org/data/2.5/${callType}?q=London,UK&units=metric`;
 
- async fiveDayApiCall() {
-   const call = await fetch('https://api.openweathermap.org/data/2.5/forecast?q=London,UK&units=metric&appid='+ process.env.API_KEY);
-   const data = await call.json();
-   return data;
- }
+    try {
+      const response = await fetch(url + '&appid=' + process.env.API_KEY);
+      const data = await response.json();
+      if (!data) return `${callType} not found`;
+      return data;
+
+    } catch(error) {
+      return `${callType}: Unexpected error occurred`;
+    }
+  }
+
+  async weatherOneDayCall() {
+    const data = await this.getWeatherData('find');
+    const formatData = this.formatOneDayData(data);
+    return formatData;
+  }
+
+  async weatherFourDayCall() {
+    return await this.getWeatherData('forecast');
+  }
+
+  formatOneDayData(data) {
+    return {
+      temp: data.list[0].main.temp,
+      description: data.list[0].weather[0].description,
+      icon: data.list[0].weather[0].icon,
+      condition: data.list[0].weather[0].main,
+    };
+  }
 }

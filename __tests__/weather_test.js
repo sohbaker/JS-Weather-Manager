@@ -1,6 +1,6 @@
 import { ApiRequest } from '../src/api_request';
 import { Weather } from '../src/weather';
-jest.mock('../src/api');
+jest.mock('../src/api_request');
 
 describe('Weather', () => {
   beforeEach(() => {
@@ -16,26 +16,26 @@ describe('Weather', () => {
     expect(ApiRequest).not.toHaveBeenCalled();
   });
 
-  it('checks whether londonOneDayWeather function makes an API request', async () => {
+  it('checks whether currentDayWeather function makes an API request', async () => {
     const weather = new Weather();
     expect(ApiRequest).toHaveBeenCalledTimes(1);
 
-    weather.londonOneDayWeather();
+    weather.currentDayWeather();
 
     const mockApiRequestInstance = ApiRequest.mock.instances[0];
-    const mockOneDayApiCall = mockApiRequestInstance.oneDayApiCall;
+    const mockOneDayApiCall = mockApiRequestInstance.weatherOneDayCall;
 
     expect(mockOneDayApiCall).toHaveBeenCalledTimes(1);
   });
 
-  it('checks whether londonFiveDayWeather function makes an API request', async () => {
+  it('checks whether nextFourDaysWeather function makes an API request', async () => {
     const weather = new Weather();
     expect(ApiRequest).toHaveBeenCalledTimes(1);
 
-    weather.londonFiveDayWeather();
+    weather.nextFourDaysWeather();
 
     const mockApiRequestInstance = ApiRequest.mock.instances[0];
-    const mockFiveDayApiCall = mockApiRequestInstance.fiveDayApiCall;
+    const mockFiveDayApiCall = mockApiRequestInstance.weatherFourDayCall;
 
     expect(mockFiveDayApiCall).toHaveBeenCalledTimes(1);
   });
