@@ -18,8 +18,11 @@ body {
 }
 
 h3 {
-  text-align: center;
+  /* text-align: center; */
   font-size: 1.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 table {

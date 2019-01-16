@@ -5,7 +5,8 @@ const weather = new Weather();
 async function getWeatherOne() {
   const displayOneDay = document.getElementById('current-day');
   const data = await weather.currentDayWeather();
-  const backgroundImage = `url('./assets/${data.condition}.png')`;
+  console.log(data.conditionID)
+  const backgroundImage = setBackground(data.conditionID);
   document.body.style.backgroundImage = backgroundImage;
 
   let table = document.createElement("table");
@@ -38,6 +39,37 @@ async function getWeatherFive() {
   const data = await weather.nextFourDaysWeather();
   return data;
 };
+
+function setBackground(condition) {
+  let cssImageUrl = '';
+  switch (true) {
+    case (condition < 300):
+      cssImageUrl = `url('./assets/Thunderstorm.png')`;
+      break;
+    case (condition >= 300 && condition < 500):
+      cssImageUrl = `url('./assets/Drizzle.png')`;
+      break;
+    case (condition >= 500 && condition < 600):
+      cssImageUrl = `url('./assets/Rain.png')`;
+      break;
+    case (condition >= 600 && condition < 700):
+      cssImageUrl = `url('./assets/Snow.png')`;
+      break;
+    case (condition >= 700 && condition < 800):
+      cssImageUrl = `url('./assets/Atmosphere.png')`;
+      break;
+    case (condition === 800):
+      cssImageUrl = `url('./assets/Clear.png')`;
+      break;
+    case (condition > 800):
+      cssImageUrl = `url('./assets/Clouds.png')`;
+      break;
+    default:
+      cssImageUrl = `url('./assets/background.png')`;
+      break;
+  }
+  return cssImageUrl;
+}
 
 function styleTemperature(temperature) {
   let color = '';
