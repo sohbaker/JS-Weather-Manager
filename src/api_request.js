@@ -27,7 +27,6 @@ export class ApiRequest {
   }
 
   formatOneDayData(data) {
-    console.log(data.list[0].weather[0].main,)
     return {
       temp: data.list[0].main.temp,
       description: data.list[0].weather[0].description,

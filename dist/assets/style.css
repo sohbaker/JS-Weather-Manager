@@ -1,56 +1,91 @@
 @import url(https://fonts.googleapis.com/css?family=Teko);
 
-html {
-  color: #222;
-  font-size: 1.5em;
-  font-weight: 500;
-  height: 100%;
-}
-
 body {
   color: #222;
   font-family: 'Teko', sans-serif;
-  height: 100%;
+  font-size: 1.5em;
+  font-weight: 500;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h3 {
-  /* text-align: center; */
-  font-size: 1.8em;
+  font-size: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 3%;
 }
 
 table {
   table-layout: fixed;
   width:75%;
   margin: 0 auto;
-  margin-bottom: 6%;
+  margin-bottom: 5%;
   background-color: white;
   border-radius: 10px;
+  padding: 35px;
 }
 
 td {
   width: 300px;
-  font-size: 1em;
+  font-size: 1.3em;
 }
 
 .flex-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 2em;
+}
+
+#header {
+  padding: 2%;
+  background-color: purple;
+  color: white;
+  text-align: center;
+  width: 70%;
+  border-radius: 10px;
+  font-weight: 1000;
+}
+
+#current-day {
+  background-color: white;
+  border-radius: 10px;
+  font-size: 3rem;
+  margin: 1em;
+  flex-direction: column;
+  width: 75%;
 }
 
 #day {
-  font-size: 1.5em;
-  color: green;
+  font-size: 3em;
+  color: purple;
 }
 
 #date {
-  font-size: 1.2em;
-  color: green;
+  font-size: 2em;
+  color: purple;
+}
+
+#today-temp {
+  font-size: 6rem;
+  margin: 0;
+}
+
+#today-icon {
+  margin: 0;
+}
+
+#today-description {
+  font-style: italic;
+}
+
+#table-empty-row {
+  border-bottom: 1px solid #000;
 }
