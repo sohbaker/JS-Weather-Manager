@@ -1,9 +1,8 @@
-const fetch = require("node-fetch");
-
 import { ApiRequest } from '../src/api_request';
 
-describe('ApiRequest', () => {
+// const fetch = require('node-fetch');
 
+describe('ApiRequest', () => {
   let api;
   beforeEach(() => {
     api = new ApiRequest();
@@ -22,4 +21,4 @@ describe('ApiRequest', () => {
     const weatherFourDay = await api.weatherFourDayCall();
     expect(weatherFourDay.cnt).toEqual(40);
   });
-})
+});
