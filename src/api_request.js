@@ -1,4 +1,5 @@
-const fetch = require("node-fetch");
+const fetch = require('node-fetch');
+// eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config();
 
 export class ApiRequest {
@@ -6,12 +7,11 @@ export class ApiRequest {
     const url = `https://api.openweathermap.org/data/2.5/${callType}?q=London,UK&units=metric`;
 
     try {
-      const response = await fetch(url + '&appid=' + process.env.API_KEY);
+      const response = await fetch(`${url}&appid=${process.env.API_KEY}`);
       const data = await response.json();
       if (!data) return `${callType} not found`;
       return data;
-
-    } catch(error) {
+    } catch (error) {
       return `${callType}: Unexpected error occurred`;
     }
   }
@@ -23,6 +23,7 @@ export class ApiRequest {
   }
 
   async weatherFourDayCall() {
+    // eslint-disable-next-line no-return-await
     return await this.getWeatherData('forecast');
   }
 
